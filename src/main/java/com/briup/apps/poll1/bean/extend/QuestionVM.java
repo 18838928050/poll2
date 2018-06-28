@@ -34,5 +34,11 @@ public String getQuestionType() {
 public void setQuestionType(String questionType) {
 	this.questionType = questionType;
 }
+public List<Options> getOptions() {
+	return options;
+}
+public void setOptions(List<Options> options) {
+	this.options = options;
+}
 
 }

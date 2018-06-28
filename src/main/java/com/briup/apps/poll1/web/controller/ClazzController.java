@@ -3,10 +3,12 @@
  */
 package com.briup.apps.poll1.web.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,78 +21,92 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
 /**
- * @author： fu @time：2018年6月25日 下午2:45:17 @说明： 一份耕耘，一份收获
- **/
+ @author： fu    @time：2018年6月26日 上午9:29:33 
+ @说明： 一份耕耘，一份收获
+**/
+@Api(description="班级相关接口")
 @RestController
-@Api(description="clazz相关接口")
 @RequestMapping("/clazz")
 public class ClazzController {
+
 	@Autowired
-	private IClazzService iClazzService;
-	@GetMapping("findAllClazzVM")
-	@ApiOperation(value="查询所有的班级信息",notes="每个班级信息中包含班级所属年级和班级所属的班主任的信息")
-	public MsgResponse findAllClazzVM() {
+	private IClazzService clazzService;
 	
-		try {
-			List<ClazzVM> list = iClazzService.findAllClazzVM();
-			return MsgResponse.success("查询成功", list);
-		} catch (Exception e) {
-			e.printStackTrace();
-			return MsgResponse.error(e.getMessage());
-		}
-	}
 	@ApiOperation("查询所有的班级信息")
 	@GetMapping("findAllClazz")
 	public MsgResponse findAllClazz(){
-		try {
-			List<Clazz> list = iClazzService.findAll();
-			
-			return MsgResponse.success("success", list);
-		} catch (Exception e) {
+		try{
+			List<Clazz> list=clazzService.findAll();
+			return MsgResponse.success("查询成功", list);
+		}catch (Exception e) {
+			// TODO: handle exception
 			e.printStackTrace();
 			return MsgResponse.error(e.getMessage());
-		}
-}
-	// 关键字查询
-	@ApiOperation("根据关键字查看clazz信息")
-	@GetMapping("query")
-	public MsgResponse query(String keywords) {
-		try {
-			List<Clazz> list = iClazzService.query(keywords);
-			return MsgResponse.success("成功", list);
-		} catch (Exception e) {
-			e.printStackTrace();
-			return MsgResponse.error(e.getMessage());
-		}
+		}	
 	}
 	
-	@ApiOperation("修改clazz信息")
-	@GetMapping("update")
-	public MsgResponse update(Clazz clazz) {
-		try {
-			iClazzService.update(clazz);
-			return MsgResponse.success("成功", null);
-		} catch (Exception e) {
+	@ApiOperation(value="保存或更新课程信息",
+			notes="如果参数中包含了id,说明这是一个更新操作。如果参数中没有包含id，说明这是一个保存操作")
+	@PostMapping("saveOrUpdateClazz")
+	public MsgResponse saveOrUpdateClazz(Clazz clazz){
+		try{
+			if(clazz!=null&&clazz.getId()!=null){
+				clazzService.update(clazz);
+			}else{
+				clazzService.save(clazz);
+			}
+			return MsgResponse.success("保存或更新成功", null);
+		}catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
 			return MsgResponse.error(e.getMessage());
 		}
 	}
-	/*
 	
-		
-		
-		@ApiOperation("保存clazz信息")
-		@GetMapping("/update")
-		public String save(Clazz clazz) {
-			
-			try {
-				iClazzService.save(clazz);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+	@ApiOperation("批量删除班级信息")
+	@PostMapping("batchDelete")
+	public MsgResponse batchDelete(long[] ids){
+		try{
+			List<Long> idList=new ArrayList<>();
+			for(long id:ids){
+				idList.add(id);
 			}
-			return "保存成功";
-			
-		}*/
+			clazzService.batchDelete(idList);
+			return MsgResponse.success("批量删除成功", null);
+		}catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			return MsgResponse.error(e.getMessage());
+		}
+	}
+	
+	@ApiOperation(value="查询所有的班级信息",notes="每个班级信息中包含班级所属年级和班级所属的班主任的信息")
+	@GetMapping("findAllClazzVM")
+	public MsgResponse findAllClazzVM(){
+		try{
+			List<ClazzVM> list=clazzService.findAllClazzVM();
+			return MsgResponse.success("查询成功", list);
+		}catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			return MsgResponse.error(e.getMessage());
+		}
+	}
+	
+//	@PostMapping("saveOrUpdateClazzVM")
+//	public MsgResponse saveOrUpdateClazzVM(ClazzVM clazzVM){
+//		try{
+//			if(clazzVM!=null&&clazzVM.getId()!=null){
+//				clazzVMService.update(clazzVM);
+//			}else{
+//				clazzVMService.save(clazzVM);
+//			}
+//			return MsgResponse.success("保存或更新成功", null);
+//		}catch (Exception e) {
+//			// TODO: handle exception
+//			e.printStackTrace();
+//			return MsgResponse.error(e.getMessage());
+//		}
+//	}
+
 }
