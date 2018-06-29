@@ -13,6 +13,12 @@ import com.briup.apps.poll1.bean.extend.QuestionVM;
  @说明： 一份耕耘，一份收获
 **/
 public interface IQuestionService  {
-	List<Question> findAll() throws Exception;
-	List<QuestionVM> findAllQuestinVM() throws Exception;
+List<Question> findAll() throws Exception;
+	
+	List<QuestionVM> findAllQuestionVM() throws Exception;
+	
+	void saveOrUpdate(QuestionVM question) throws Exception;
+	void deleteById(Long id) throws Exception;
 }
+
+
