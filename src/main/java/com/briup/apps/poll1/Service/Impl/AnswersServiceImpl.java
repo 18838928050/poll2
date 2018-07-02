@@ -32,11 +32,20 @@ public class AnswersServiceImpl implements IAnswersService {
 		return answersMapper.selectByExample(example);
 	}
 
-
+	/* (non-Javadoc)
+	 * @see com.briup.apps.poll1.Service.IAnswersService#findAnswersBySurveyId(long)
+	 */
+	@Override
+	public List<Answers> findAnswersBySurveyId(long id) throws Exception {
+		// TODO Auto-generated method stub
+		AnswersExample example=new AnswersExample();
+		example.createCriteria().andSurveyIdEqualTo(id);
+		return answersMapper.selectByExample(example);
+	}
+	
 	@Override
 	public void delete(long id) throws Exception {
 		answersMapper.deleteByPrimaryKey(id);
-
 	}
 
 	@Override
@@ -44,17 +53,12 @@ public class AnswersServiceImpl implements IAnswersService {
 		for (Long id : ids) {
 			answersMapper.deleteByPrimaryKey(id);
 		}
-
 	}
 
 	@Override
 	public List<AnswersVM> findAllAnswersVM() throws Exception {
 		return answersVMMapper.selectAll();
 	}
-
-	/* (non-Javadoc)
-	 * @see com.briup.apps.poll1.Service.IAnswersService#saveorUpdate(com.briup.apps.poll1.bean.Answers)
-	 */
 	@Override
 	public void saveorUpdate(Answers answers) throws Exception {
 	if (answers.getId()!=null) {
@@ -64,15 +68,6 @@ public class AnswersServiceImpl implements IAnswersService {
 	}
 	}
 
-	/* (non-Javadoc)
-	 * @see com.briup.apps.poll1.Service.IAnswersService#findAnswersBySurveyId(long)
-	 */
-	@Override
-	public List<Answers> findAnswersBySurveyId(long id) throws Exception {
-		// TODO Auto-generated method stub
-		AnswersExample example=new AnswersExample();
-		example.createCriteria().andSurveyIdEqualTo(id);
-		return null;
-	}
+	
 
 }

@@ -1,11 +1,16 @@
 package com.briup.apps.poll1.web.controller;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.briup.apps.poll1.Service.IAnswersService;
 import com.briup.apps.poll1.bean.Answers;
+import com.briup.apps.poll1.bean.extend.AnswersVM;
 import com.briup.apps.poll1.util.MsgResponse;
 
 import io.swagger.annotations.Api;
@@ -15,6 +20,7 @@ import io.swagger.annotations.ApiOperation;
 @RestController
 @RequestMapping("/answers")
 public class AnswersController {
+	@Autowired
 	private IAnswersService answersService;
 
 	@ApiOperation(value = "提交答卷，每个学生提交一份")
@@ -33,7 +39,7 @@ public class AnswersController {
 		}
 
 	}
-/*
+
 	@ApiOperation(value = "查询答卷", notes = "答卷对应的课调信息")
 	@GetMapping("findAllAnswersVM")
 	public MsgResponse findAllAnswersVM() {
@@ -45,7 +51,7 @@ public class AnswersController {
 			return MsgResponse.error(e.getMessage());
 		}
 	}
-
+	/*
 	@ApiOperation(value = "查询答卷")
 	@GetMapping("findAllAnswers")
 	public MsgResponse findAllAnswers() {
