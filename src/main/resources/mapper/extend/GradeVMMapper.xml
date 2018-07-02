@@ -11,7 +11,7 @@
    id="GradeVMResultMap">
       <id column="id" property="id"/>
       <result column="name" property="name"/>
-      <result column="descriptioin" property="descriptioin"/>
+      <result column="description" property="descriptioin"/>
       
       <association  
          column="school_id" 

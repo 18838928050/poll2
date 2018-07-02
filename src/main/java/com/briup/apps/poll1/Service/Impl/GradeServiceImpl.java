@@ -51,7 +51,7 @@ public class GradeServiceImpl implements IGradeService{
 
 	@Override
 	public void update(Grade grade) throws Exception {
-		gradeMapper.updateByPrimaryKeyWithBLOBs(grade);
+		gradeMapper.updateByPrimaryKey(grade);
 		
 		
 	}
