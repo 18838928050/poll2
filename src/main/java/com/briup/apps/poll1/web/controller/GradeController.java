@@ -18,7 +18,6 @@ import io.swagger.annotations.ApiOperation;
 @Api(description = "年级相关接口")
 @RestController
 @RequestMapping("/grade")
-
 public class GradeController {
 	/**
 	 * @return
