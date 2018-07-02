@@ -7,6 +7,9 @@
   	select * from poll_clazz
   	<!-- id name description grade_id charge_id -->
   </select>
+   <select id="selectById" parameterType="long" resultMap="ClazzVMResultMap">
+  	select * from poll_clazz where id = #{id}
+ </select>
   
   <resultMap type="com.briup.apps.poll1.bean.extend.ClazzVM" 
   	id="ClazzVMResultMap">

@@ -28,17 +28,24 @@ public class SurveyServiceImpl  implements ISurveyService{
 	private SurveyVMMapper surveyVMMapper;
 	@Override
 	public void saveOrUpdate(Survey survey) throws Exception {
-		// TODO Auto-generated method stub
-		//在保存之前先初始化课调信息
-		survey.setStatus(Survey.STATUS_INIT);
-		survey.setCode("");
-		//日期处理
-		Date surveyDate=new Date();
-		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		String str=	sdf.format(surveyDate);
-		survey.setSurveydate(str);
+		if (survey.getId()!=null) {
+			surveyMapper.updateByPrimaryKey(survey);
+		}else{
+			// TODO Auto-generated method stub
+						//在保存之前先初始化课调信息
+						survey.setStatus(Survey.STATUS_INIT);
+						survey.setCode("");
+						//日期处理
+						Date surveyDate=new Date();
+						SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+						String str=	sdf.format(surveyDate);
+						survey.setSurveydate(str);
+						
+						surveyMapper.insert(survey);
+		}
 		
-		surveyMapper.insert(survey);
+		
+	
 	}
 	@Override
 	public List<SurveyVM> findAll() throws Exception {
@@ -48,6 +55,22 @@ public class SurveyServiceImpl  implements ISurveyService{
 	public SurveyVM findById(long id) throws Exception {
 		
 		return surveyVMMapper.selectById(id);
+	}
+	/* (non-Javadoc)
+	 * @see com.briup.apps.poll1.Service.ISurveyService#findSurveyById(long)
+	 */
+	@Override
+	public Survey findSurveyById(long id) throws Exception {
+		
+		return surveyMapper.selectByPrimaryKey(id);
+	}
+	/* (non-Javadoc)
+	 * @see com.briup.apps.poll1.Service.ISurveyService#findByStatus(java.lang.String)
+	 */
+	@Override
+	public List<SurveyVM> findByStatus(String status) throws Exception {
+		// TODO Auto-generated method stub
+		return surveyVMMapper.selectByStatus(status);
 	}
 
 }

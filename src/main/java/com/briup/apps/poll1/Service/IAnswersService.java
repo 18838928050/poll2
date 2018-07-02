@@ -13,11 +13,10 @@ public interface IAnswersService {
 
 	List<AnswersVM> findAllAnswersVM() throws Exception;
 
-	void save(Answers answers) throws Exception;
-
-	void update(Answers answers) throws Exception;
+	void saveorUpdate(Answers answers) throws Exception;
 
 	void delete(long id) throws Exception;
 
 	void batchDelete(Long[] ids) throws Exception;
+	List<Answers> findAnswersBySurveyId(long id) throws Exception;
 }
