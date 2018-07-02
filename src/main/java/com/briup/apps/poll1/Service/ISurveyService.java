@@ -16,4 +16,6 @@ public interface ISurveyService {
 void saveOrUpdate(Survey survey) throws Exception;
 List<SurveyVM> findAll() throws Exception;
 SurveyVM findById(long id)throws Exception;
+Survey findSurveyById(long id )throws Exception;
+List<SurveyVM> findByStatus(String status)throws Exception;
 }

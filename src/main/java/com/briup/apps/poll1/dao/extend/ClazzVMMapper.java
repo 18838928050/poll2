@@ -20,4 +20,5 @@ public interface ClazzVMMapper {
 	 */
 	void insert(ClazzVM clazzVM);
 	void update(ClazzVM clazzVM);
+	ClazzVM selectById();
 }
