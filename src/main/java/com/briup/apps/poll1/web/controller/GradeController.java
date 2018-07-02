@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -61,33 +62,16 @@ public class GradeController {
 		}	
 	}
 	
-	@ApiOperation(value="保存或修改修改年级信息",notes="如果年级id不为空，表示更新操作;如果年级id为空，表示保存操作")
-	@PostMapping("saveOrUpdateGrade")
-	public MsgResponse saveOrUpdateGrade(Grade grade){
+	@ApiOperation(value="保存或更新年级信息",notes="参数中id不为空表示插入，否则表示更新")
+	@PostMapping(value="saveOrUpdate")
+	public MsgResponse saveOrUpdate(@ModelAttribute Grade grade) {
 		try {
-			if(grade!=null&&grade.getId()!=null){
-				gradeService.update(grade);
-			}else{
-				gradeService.save(grade);
-			}
-			return MsgResponse.success("success", null);
+			gradeService.saveOrUpdate(grade);
+			return MsgResponse.success("保存或更新成功", null);
 		} catch (Exception e) {
-			e.printStackTrace();
 			return MsgResponse.error(e.getMessage());
-		}	
+		}
 	}
-	
-//	@ApiOperation(value="修改年级信息")	
-//	@PostMapping("updateGrade")
-//	public MsgResponse updateGrade(Grade grade){
-//		try {
-//			gradeService.update(grade);
-//			return MsgResponse.success("success", null);
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//			return MsgResponse.error(e.getMessage());
-//		}	
-//	}
 	
 	@ApiOperation(value="通过ID删除年级")
 	@GetMapping("deleteByIdGrade")

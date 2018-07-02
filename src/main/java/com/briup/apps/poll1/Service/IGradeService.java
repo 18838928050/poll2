@@ -2,7 +2,6 @@ package com.briup.apps.poll1.Service;
 
 import java.util.List;
 
-
 import com.briup.apps.poll1.bean.Grade;
 import com.briup.apps.poll1.bean.extend.GradeVM;
 
@@ -13,9 +12,7 @@ public interface IGradeService {
 	
 	List<Grade> query(String keywords) throws Exception;
 	
-	void save(Grade grade) throws Exception;
-	
-	void update(Grade grade) throws Exception;
+	void saveOrUpdate(Grade grade) throws Exception;
 	
 	void deleteById(long id) throws Exception;
 	

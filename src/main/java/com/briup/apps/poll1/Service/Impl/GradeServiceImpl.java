@@ -42,19 +42,7 @@ public class GradeServiceImpl implements IGradeService{
 		return gradeMapper.selectByExampleWithBLOBs(example);
 	}
 
-	@Override
-	public void save(Grade grade) throws Exception {
-		gradeMapper.insert(grade);
-		
-		
-	}
-
-	@Override
-	public void update(Grade grade) throws Exception {
-		gradeMapper.updateByPrimaryKey(grade);
-		
-		
-	}
+	
 
 	@Override
 	public void deleteById(long id) throws Exception {
@@ -66,6 +54,19 @@ public class GradeServiceImpl implements IGradeService{
 	public void batchDelete(long[] ids) throws Exception {
 		for(long id : ids){
 			gradeMapper.deleteByPrimaryKey(id);
+		}
+	}
+
+	/* (non-Javadoc)
+	 * @see com.briup.apps.poll1.Service.IGradeService#saveOrUpdate(com.briup.apps.poll1.bean.Grade)
+	 */
+	@Override
+	public void saveOrUpdate(Grade grade) throws Exception {
+		// TODO Auto-generated method stub
+		if(grade.getId()!=null) {
+			gradeMapper.updateByPrimaryKey(grade);
+		} else {
+			gradeMapper.insert(grade);
 		}
 	}
 
