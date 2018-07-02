@@ -9,7 +9,7 @@
   </select>
    <select id="selectById" parameterType="long" resultMap="ClazzVMResultMap">
   	select * from poll_clazz where id = #{id}
-  <lect>
+ </select>
   
   <resultMap type="com.briup.apps.poll1.bean.extend.ClazzVM" 
   	id="ClazzVMResultMap">
