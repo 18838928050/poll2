@@ -7,12 +7,18 @@
 	</select>
 	<resultMap type="com.briup.apps.poll1.bean.extend.QuestionVM" id="QuestionVMResultMap">
 		<id column="id" property="id" />
-		
 		<result column="name" property="name" />
-		<result column="questionType" property="description" />
+		<result column="questionType" property="questionType" />
 		<collection column="id"  property="options" javaType="ArrayList" ofType="com.briup.apps.poll1.bean.Options" select="selectOptionsByQuestionId"></collection>
 	</resultMap>
 	<select id="selectOptionsByQuestionId" resultType="com.briup.apps.poll1.bean.Options">
-	select * from poll_options where queston_id=#{id}
+	select * from poll_options where question_id=#{id}
+	</select>
+		  <!-- 通过 questionnaire_id 找到该问卷下所有问题的信息 -->
+	<select id="selectByQuestionnaireId" parameterType="long" resultMap="QuestionVMResultMap">
+		select * from poll_question where id in (
+  		select question_id from poll_qq where questionnaire_id = #{id}
+  	)
+	
 	</select>
 </mapper>

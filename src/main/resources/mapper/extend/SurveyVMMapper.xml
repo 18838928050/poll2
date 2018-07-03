@@ -5,7 +5,12 @@
 		select * from poll_survey
 		<!-- id status code surveyDate -->
 	</select>
-
+ <select id="selectByStatus"
+  	 parameterType="java.lang.String" 
+  	 resultMap="SurveyVMResultMap">
+  	select * from poll_survey where status = #{status}
+  </select>
+  
 	<select id="selectById" parameterType="long" resultMap="SurveyVMResultMap">
 		select * from poll_survey where id = #{id}
 		<!-- id status code surveyDate course_id clazz_id user_id questionnaire_id -->
