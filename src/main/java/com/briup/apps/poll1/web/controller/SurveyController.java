@@ -24,7 +24,7 @@ import io.swagger.annotations.ApiOperation;
 /**
  * @author： fu @time：2018年6月29日 上午8:25:36 @说明： 一份耕耘，一份收获
  **/
-@Api(description = "课调相关接口")
+@Api(description = "课调相关接口（OK)")
 @RestController
 @RequestMapping("/survey")
 public class SurveyController {

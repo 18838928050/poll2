@@ -23,7 +23,7 @@ import io.swagger.annotations.ApiOperation;
  @author： fu    @time：2018年6月28日 下午5:27:54 
  @说明： 一份耕耘，一份收获
 **/
-@Api(description="问卷相关接口")
+@Api(description="问卷相关接口(OK)")
 @RestController
 @RequestMapping("/questionnaire")
 public class QuestionnaireVMController {

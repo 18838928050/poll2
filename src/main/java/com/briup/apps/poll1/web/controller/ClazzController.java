@@ -24,14 +24,12 @@ import io.swagger.annotations.ApiOperation;
  @author： fu    @time：2018年6月26日 上午9:29:33 
  @说明： 一份耕耘，一份收获
 **/
-@Api(description="班级相关接口")
+@Api(description="班级相关接口(OK)")
 @RestController
 @RequestMapping("/clazz")
 public class ClazzController {
-
 	@Autowired
 	private IClazzService clazzService;
-	
 	@ApiOperation("查询所有的班级信息")
 	@GetMapping("findAllClazz")
 	public MsgResponse findAllClazz(){
@@ -39,7 +37,6 @@ public class ClazzController {
 			List<Clazz> list=clazzService.findAll();
 			return MsgResponse.success("查询成功", list);
 		}catch (Exception e) {
-			// TODO: handle exception
 			e.printStackTrace();
 			return MsgResponse.error(e.getMessage());
 		}	
@@ -93,20 +90,5 @@ public class ClazzController {
 		}
 	}
 	
-//	@PostMapping("saveOrUpdateClazzVM")
-//	public MsgResponse saveOrUpdateClazzVM(ClazzVM clazzVM){
-//		try{
-//			if(clazzVM!=null&&clazzVM.getId()!=null){
-//				clazzVMService.update(clazzVM);
-//			}else{
-//				clazzVMService.save(clazzVM);
-//			}
-//			return MsgResponse.success("保存或更新成功", null);
-//		}catch (Exception e) {
-//			// TODO: handle exception
-//			e.printStackTrace();
-//			return MsgResponse.error(e.getMessage());
-//		}
-//	}
 
 }

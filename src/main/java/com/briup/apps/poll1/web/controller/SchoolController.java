@@ -11,20 +11,16 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.briup.apps.poll1.Service.ISchoolService;
 import com.briup.apps.poll1.bean.School;
-
 import com.briup.apps.poll1.util.MsgResponse;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
-@Api(description="学校相关接口")
+@Api(description="学校相关接口(OK)")
 @RestController
 @RequestMapping("/school")
 public class SchoolController {
 
-	/**
-	 * @return
-	 */
 	@Autowired
 	private ISchoolService schoolService;
 	
@@ -33,7 +29,7 @@ public class SchoolController {
 	public MsgResponse findAllSchool(){
 		try {
 			List<School> list = schoolService.findAll();
-			return MsgResponse.success("success", list);
+			return MsgResponse.success("查询成功", list);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return MsgResponse.error(e.getMessage());
@@ -41,7 +37,7 @@ public class SchoolController {
 	}
 	
 	@ApiOperation(value="通过id删除学校信息")
-	@GetMapping("deleteSchoolById")
+	@PostMapping("deleteSchoolById")
 	public MsgResponse deleteSchoolById(@RequestParam Long id){
 		try {
 			schoolService.deleteById(id);
@@ -57,9 +53,9 @@ public class SchoolController {
 	public MsgResponse saveOrUpdateSchool(School school){
 		try {
 			if(school!=null&&school.getId()!=null){
-				schoolService.save(school);
-			}else{
 				schoolService.update(school);
+			}else{
+				schoolService.save(school);
 			}
 			return MsgResponse.success("success", null);
 		} catch (Exception e) {

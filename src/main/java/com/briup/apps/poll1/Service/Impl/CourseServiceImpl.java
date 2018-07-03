@@ -33,7 +33,7 @@ public class CourseServiceImpl implements ICourseService {
 	public List<Course> query(String keywords) throws Exception {
 		CourseExample example=new CourseExample();
 		//创建一个模板
-		example.createCriteria().andNameLike(keywords);
+		example.createCriteria().andNameLike("%"+keywords+"%");
 		return courseMapper.selectByExampleWithBLOBs(example);
 	}
 

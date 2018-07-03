@@ -17,7 +17,7 @@ import com.briup.apps.poll1.util.MsgResponse;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
-@Api(description="用户相关接口")
+@Api(description="用户相关接口(OK)")
 @RestController
 @RequestMapping("/user")
 public class UserController {

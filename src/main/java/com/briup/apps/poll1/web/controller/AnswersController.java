@@ -16,7 +16,7 @@ import com.briup.apps.poll1.util.MsgResponse;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
-@Api(description = "学生答卷相关接口")
+@Api(description = "学生答卷相关接口(ok)")
 @RestController
 @RequestMapping("/answers")
 public class AnswersController {

@@ -24,7 +24,7 @@ import io.swagger.annotations.ApiOperation;
  **/
 @RestController
 @RequestMapping("/course")
-@Api(description="课程相关接口")
+@Api(description="课程相关接口(ok)")
 public class CourseController {
 	@Autowired
 	private ICourseService courseService;

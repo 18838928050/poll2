@@ -21,7 +21,7 @@ import io.swagger.annotations.ApiOperation;
 /**
  * @author： wangying @time：2018年6月25日 下午2:45:17 @说明： 一份耕耘，一份收获
  **/
-@Api(description = "题目模块相关接口")
+@Api(description = "题目模块相关接口(OK)")
 @RestController
 @RequestMapping("/question")
 public class QuestionController {
