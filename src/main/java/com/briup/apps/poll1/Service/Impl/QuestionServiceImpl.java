@@ -92,6 +92,26 @@ private QuestionVMMapper questionVMMapper;
 		questionMapper.deleteByPrimaryKey(id);
 	
 	}
+	/* (non-Javadoc)
+	 * @see com.briup.apps.poll1.Service.IQuestionService#batchDelete(java.util.List)
+	 */
+	@Override
+	public void batchDelete(List<Long> ids) {
+		for (Long id : ids) {
+			questionMapper.deleteByPrimaryKey(id);
+		}
+		
+	}
+	/* (non-Javadoc)
+	 * @see com.briup.apps.poll1.Service.IQuestionService#query(java.lang.String)
+	 */
+	@Override
+	public List<Question> query(String keywords) {
+		QuestionExample	 example=new QuestionExample();
+		//创建一个模板
+		example.createCriteria().andNameLike("%"+keywords+"%");
+		return questionMapper.selectByExample(example);
+	}
 
 	
 	

@@ -19,6 +19,16 @@ List<Question> findAll() throws Exception;
 	
 	void saveOrUpdate(QuestionVM question) throws Exception;
 	void deleteById(Long id) throws Exception;
+
+	/**
+	 * @说明：
+	 */
+	void batchDelete(List<Long> idList);
+
+	/**
+	 * @说明：
+	 */
+	List<Question> query(String keywords);
 }
 
 

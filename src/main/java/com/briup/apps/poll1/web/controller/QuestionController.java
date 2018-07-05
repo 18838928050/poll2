@@ -3,6 +3,7 @@
  */
 package com.briup.apps.poll1.web.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.briup.apps.poll1.Service.IQuestionService;
+import com.briup.apps.poll1.bean.Question;
 import com.briup.apps.poll1.bean.extend.QuestionVM;
 import com.briup.apps.poll1.util.MsgResponse;
 
@@ -41,6 +43,36 @@ public class QuestionController {
 		}
 	}
 
+	// 批量删除
+		@ApiOperation("批量删除课程question信息")
+		@PostMapping("batchDelete")
+		public MsgResponse batchDelete(long[] ids) {
+			try {
+				List<Long> idList = new ArrayList<>();
+				for (Long id : ids) {
+					idList.add(id);
+				}
+				iQuestionService.batchDelete(idList);
+				return MsgResponse.success("批量删除成功", null);
+			} catch (Exception e) {
+				e.printStackTrace();
+				return MsgResponse.error(e.getMessage());
+			}
+		}
+		
+		
+		// 关键字查询
+		@ApiOperation("根据关键字查看question信息")
+		@GetMapping("/queryByKeyWords")
+		public MsgResponse query(String keywords) {
+			try {
+				List<Question> list = iQuestionService.query(keywords);
+				return MsgResponse.success("成功", list);
+			} catch (Exception e) {
+				e.printStackTrace();
+				return MsgResponse.error(e.getMessage());
+			}
+		}
 	@ApiOperation(value = "保存或修改题目信息", notes = "如果题目id不为空表示更新操作，如果题目id为空表示插入操作，保存或者更新题目的时候级联保存或者更新选项")
 	@PostMapping("/saveOrUpdateQuestion")
 	public MsgResponse saveOrUpdateQuestion(QuestionVM question) {
