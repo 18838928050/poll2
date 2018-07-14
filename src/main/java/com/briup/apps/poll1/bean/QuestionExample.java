@@ -35,7 +35,7 @@ public class QuestionExample {
      * @mbg.generated Tue Jun 26 10:41:33 CST 2018
      */
     public QuestionExample() {
-        oredCriteria = new ArrayList<Criteria>();
+        oredCriteria = new ArrayList<>();
     }
 
     /**
@@ -158,7 +158,7 @@ public class QuestionExample {
 
         protected GeneratedCriteria() {
             super();
-            criteria = new ArrayList<Criterion>();
+            criteria = new ArrayList<>();
         }
 
         public boolean isValid() {
@@ -296,7 +296,7 @@ public class QuestionExample {
 
         public Criteria andNameLike(String value) {
             addCriterion("name like", value, "name");
-            return (Criteria) this;
+            return (Criteria) this; 
         }
 
         public Criteria andNameNotLike(String value) {
